@@ -1,386 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="description" content="vector社区">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="Android,Native React, 终端开发">
-  <!-- see http://smerity.com/articles/2013/where_did_all_the_http_referrers_go.html -->
-  <meta name="referrer" content="always">
-  <link title="RSS" type="application/rss+xml" rel="alternate" href="http://dev.qq.com/rss">
-  <link rel="icon" href="http://dev.qq.com/public/images/bugly_b.ico" type="image/x-icon">
-  <!-- style -->
-  <link rel="stylesheet" href="css/index.css" media="all">
-  <!-- scripts -->
-  <script src="js/index.js"></script>
-  <title>vector blog</title>
-  <meta content="_csrf" name="csrf-param">
-  <meta content="vQ51gt4g-eDqFgvg0o_Id-RVyFRWdczgz3jQ" name="csrf-token">
-</head>
-<body>
-<!-- navbar -->
-<div class="navbar">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="#">
-          vector blog
-      </a>
-      <form id="search_form" class="navbar-search" action="#" method="get">
-        <input type="text" id="search_text" name="text" class="search-query span3" value="">
-      </form>
-      <ul class="nav pull-right">
-        <li><a href="#">登录</a></li>
-      </ul>
+
+<% include header.html %>
+<div class="container-fluid">
+<div class="row-fluid">
+    <div class="col-sm-9">
+        <div class="row-fluid">
+            <div class="jumbotron">
+                <div class="container">
+                    <p>从不羡慕别人的优秀，因为相信自己也可以优秀。</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;闲下来时看看书，书本里的故事，总有你学到的人生。</p>
+                    <p style="margin-left: 500px">---By:高旭旭</p>
+                </div>
+            </div>
+
+            <% for (var i=0;i< articleList.length;i++) { %>
+
+            <div class="span4 panel panel-default">
+                <div class="panel-body">
+                    <div class="col-sm-2">
+                        <img src="<%=articleList[i].tag.logo %>" style="width: 200px;height: 150px;">
+                    </div>
+                    <div class="col-sm-10">
+                        <h2>《<%=articleList[i].title%>》</h2>
+                        <br>
+                        <p>&nbsp;&nbsp;<%=articleList[i].brief%></p>
+                        <br>
+                        <p>&nbsp;&nbsp;<a class="btn btn-primary btn-large" href="/<%=articleList[i].id%>.html">查看详情 &raquo;</a></p>
+                        <p class="pull-right col-md-9">
+                            <span class="col-md-4">发表:<%=articleList[i].pubtime%></span>
+                            <span class="col-md-3">浏览数(<%=articleList[i].hits%>)</span>
+                            <span class="col-md-2">点赞(<%=articleList[i].good%>)</span>
+                        </p>
+                    </div>
+                </div>
+            </div><!--/span-->
+
+            <% } %>
+
+            <div class="panel panel-default ">
+                <div class="container panel-body ">
+                    <div class="pages">
+                        <div id="Pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/row-->
+    </div><!--/row-->
+
+    <div class="col-sm-3">
+
+        <% include right.html %>
+
     </div>
-  </div>
 </div>
-<div id="main">
-  <div id="sidebar">
-
-  <div class="panel">
-    
-    <div class="inner">
-      <p>vector</p>
-      <!--
-      <div>
-        您可以
-        <a href='/signin'>登录</a>
-        或
-        <a href='/signup'>注册</a>
-        , 也可以
-        <a href="/auth/github">
-          <span class="span-info">
-            通过 GitHub 登录
-          </span>
-        </a>
-      </div>
-      -->
-    </div>
-    
-  </div>
-
-  
-
-  
-    
-  
-
-  
-
-  
-
-  <!--
-  <div class='panel'>
-    <div class='header'>
-      <span class='col_fade'>友情社区</span>
-    </div>
-    <div class='inner'>
-      <ol class="friendship-community">
-        <li>
-          <a href="https://ruby-china.org/" target="_blank">
-            <img src="/public/images/ruby-china-20150529.png">
-          </a>
-        </li>
-        <div class="sep10"></div>
-        <li>
-          <a href="http://golangtc.com/" target="_blank">
-            <img src="/public/images/golangtc-logo.png">
-          </a>
-        </li>
-        <div class="sep10"></div>
-        <li>
-          <a href="http://phphub.org/" target="_blank">
-            <img src="/public/images/phphub-logo.png">
-          </a>
-        </li>
-      </ol>
-    </div>
-  </div>
-  -->
-  <div class="panel">
-    <div class="header">
-      <span class="col_fade">Bugly公众号</span>
-    </div>
-    <div class="inner cnode-app-download">
-      <img width="200" src="./Dev开发者社区_files/wechat.png">
-      <br>
-      <!--
-      <a href="https://itunes.apple.com/cn/app/id954734793" target="_blank">iOS</a>/<a href="http://fir.im/ks4u" target="_blank">Android</a>
-      -->
-    </div>
-  </div>
-
 </div>
+<% include footer.html %>
+<script type="text/javascript">
 
+    $(document).ready(function() {
 
-<div id="content">
-  <div class="panel">
-      <div class="header">
-           <div class="header-tab">
-              <a href="#" class="topic-tab current-tab">最新</a>
-              
-              <a href="#" class="topic-tab ">推荐</a>
-              
-              <a href="#" class="topic-tab ">技术</a>
-              
-              <a href="#" class="topic-tab ">生活</a>
-              
-              <a href="#" class="topic-tab ">问答</a>
-              
-          </div>
-      </div>
-    
-    <div class="inner no-padding">
-      <div id="topic_list" class="topic_list">
-        <div class="cell">
-          <div class="user_action">
-            <span>
-              <i class="fa up_topic_btn
-              fa-thumbs-o-up" topic_id="577e16a7640ad7b4682c64a7" title="喜欢"></i>
-              <span class="up-count">
-                 2
-               </span>
-            </span>
-    
-          </div>
-        <div class="topic_title_wrapper">
-    
-          <a class="topic_title" href="http://dev.qq.com/topic/577e16a7640ad7b4682c64a7" title="【Dev Club分享】React Native项目实战总结。">
-            【Dev Club分享】React Native项目实战总结。
-      
-           </a>
-    
-        </div>
+        var totalPage = '<%=totalPage%>';
+        var page = '<%=currentPage%>';
+        $("#Pagination").pagination(totalPage, {current_page: (page - 1), link_to: '/'});
 
-        <div class="topic_info">
-            <a class="topic_author dark" href="http://dev.qq.com/user/115290">Bugly_Tony</a>
-            <span class="reply_count">
-                <span class="count_of_replies" title="回复数">
-                    <a href="http://dev.qq.com/topic/577e16a7640ad7b4682c64a7">0 条评论</a>
-                </span>
-            </span>
-            <a class="user_avatar pull-left hide" href="http://dev.qq.com/user/115290">
-              <img src="./Dev开发者社区_files/200x200landi.jpg" title="115290">
-            </a>
-        </div>
-  
-      </div>
-<div class="cell">
-  <div class="user_action">
-    
-      <span>
-        <i class="fa up_topic_btn
-        fa-thumbs-o-up" topic_id="577e0acc896e9ebb6865f321" title="喜欢"></i>
-        <span class="up-count">
-        
-        </span>
-      </span>
-    
-  </div>
-  <div class="topic_title_wrapper">
-    
-    <a class="topic_title" href="http://dev.qq.com/topic/577e0acc896e9ebb6865f321" title="移动App入侵与逆向破解技术－iOS篇">
-      移动App入侵与逆向破解技术－iOS篇
-      
-    </a>
-    
-  </div>
-
-  <div class="topic_info">
-   
-    <a class="topic_author dark" href="http://dev.qq.com/user/115290">Bugly_Tony</a>
-
-    <span class="reply_count">
-      <span class="count_of_replies" title="回复数">
-        <a href="http://dev.qq.com/topic/577e0acc896e9ebb6865f321">0 条评论</a>
-      </span>
-      <!--
-      <span class="count_seperator">/</span>
-      <span class="count_of_visits" title='点击数'>
-        380
-      </span>
-      -->
-    </span>
-
-    <a class="user_avatar pull-left hide" href="http://dev.qq.com/user/115290">
-      <img src="./Dev开发者社区_files/200x200landi.jpg" title="115290">
-    </a>
-    <!--
-      <span class='last_time pull-right'>
-        <span class="last_active_time">18 天前</span>
-      </span>
-      -->
-  </div>
-</div>
-<div class="cell">
-  <div class="user_action">
-    
-      <span>
-        <i class="fa up_topic_btn
-        fa-thumbs-o-up" topic_id="575637554c21f54470294928" title="喜欢"></i>
-        <span class="up-count">
-        
-        </span>
-      </span>
-    
-  </div>
-  <div class="topic_title_wrapper">
-    
-    <a class="topic_title" href="http://dev.qq.com/topic/575637554c21f54470294928" title="如何使用Android Studio把自己的Android library分发到jCenter和Maven Central">
-      如何使用Android Studio把自己的Android library分发到jCenter和Maven Central
-      <span>（www.devtf.cn）</span>
-    </a>
-    
-  </div>
-
-  <div class="topic_info">
-    <!--
-    
-
-    -->
-
-    <a class="topic_author dark" href="http://dev.qq.com/user/80769">kirito</a>
-
-    <span class="reply_count">
-      <span class="count_of_replies" title="回复数">
-        <a href="http://dev.qq.com/topic/575637554c21f54470294928">0 条评论</a>
-      </span>
-      <!--
-      <span class="count_seperator">/</span>
-      <span class="count_of_visits" title='点击数'>
-        125
-      </span>
-      -->
-    </span>
-
-    <a class="user_avatar pull-left hide" href="http://dev.qq.com/user/80769">
-      <img src="./Dev开发者社区_files/200x200landi.jpg" title="80769">
-    </a>
-
-    
-    <!--
-    <a class='last_time pull-right' href="/topic/575637554c21f54470294928#575637554c21f54470294929">
-      <img class="user_small_avatar" src="https://cdn.bugly.qq.com/BuglyLogo/200x200landi.jpg">
-      <span class="last_active_time">2 个月前</span>
-    </a>
-    -->
-    
-    
-  </div>
-  
-</div>
-
-</div>
-<div class="pagination" current_page="2">
-  <ul>
-    
-
-    
-    <li><a href="http://dev.qq.com/?tab=latest&amp;page=1">«</a></li>
-    
-
-    
-
-    
-
-    
-    
-    <li><a href="http://dev.qq.com/?tab=latest&amp;page=1">1</a></li>
-    
-    
-    
-    <li class="disabled active"><a>2</a></li>
-    
-    
-    
-    <li><a href="http://dev.qq.com/?tab=latest&amp;page=3">3</a></li>
-    
-    
-    
-    <li><a href="http://dev.qq.com/?tab=latest&amp;page=4">4</a></li>
-    
-    
-
-    
-
-    
-    <li><a href="http://dev.qq.com/?tab=latest&amp;page=4">»</a></li>
-    
-  </ul>
-</div>
-<script>
-  $(document).ready(function () {
-    var $nav = $('.pagination');
-    var current_page = $nav.attr('current_page');
-    if (current_page) {
-      $nav.find('li').each(function () {
-        var $li = $(this);
-        var $a = $li.find('a');
-        if ($a.html() == current_page) {
-          $li.addClass('active');
-          $a.removeAttr('href');
-        }
-      });
-    }
-  });
-
-  //Thumb up
-  $('.up_topic_btn').click(function (e) {
-    var $this = $(this);
-    var topicId = $this.attr('topic_id');
-    $.ajax({
-      url: '/topic/' + topicId + '/up',
-      method: 'POST'
-    }).done(function (data) {
-      if (data.success) {
-        var currentCount = Number($this.next('.up-count').text().trim()) || 0;
-        if (data.action === 'up') {
-          $this.next('.up-count').text(currentCount + 1);
-          $this.addClass('uped');
-          $this.removeClass('fa-thumbs-o-up');
-          $this.addClass('fa-thumbs-up');
-        } else {
-          if (data.action === 'down') {
-            $this.next('.up-count').text(currentCount - 1);
-            $this.removeClass('uped');
-            $this.removeClass('fa-thumbs-up');
-            $this.addClass('fa-thumbs-o-up');
-          }
-        }
-      } else {
-        alert(data.message);
-      }
-    }).fail(function (xhr) {
-      if (xhr.status === 403) {
-        alert('请先登录，登陆后即可点赞。');
-      }
     });
-  });
+
 </script>
 
-    </div>
-    
-  </div>
-</div>
-
-</div>
-<!--<div id='backtotop'>回到顶部</div>  Edited by faninx -->
-<div id="backtotop" style="top: 695px; right: 0px;">
-    <img src="./Dev开发者社区_files/icon_top.png">
-</div>
-<div id="footer">
-  <div id="footer_main">
-    <div class="links">
-      <a class="dark" href="http://dev.qq.com/about">关于</a>
-      <span class="seperator">|</span>
-      <a class="dark" href="https://bugly.qq.com/contact">联系我们</a>
-    </div>
-    <p>Copyright © 1998 - 2016 Tencent. All Rights Reserved. </p>
-    <p>腾讯公司 版权所有</p>
-  </div>
-</div>
-<div id="sidebar-mask"></div>
-
-
-
-</body></html>
